@@ -90,7 +90,8 @@ function App() {
           <RacingBarChart data={currentData} />
         </div>
       </Suspense>
-      <button onClick={() => setIteration(0)}>Reset</button>
+      <button onClick={() => setIteration(0)}>Restart</button>
+      <footer>Made by <a href="https://www.github.com/lkameya">Leo</a></footer>
     </>
   );
 }

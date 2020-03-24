@@ -18,7 +18,8 @@ svg {
 }
 
 button {
-  width: 100px;
+  width: 200px;
+  height: 20px;
   border: 1px solid black;
   margin: 0 auto 5px;
 }
@@ -26,6 +27,7 @@ button {
 button:hover {
   background-color: #eee;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 html, body {
@@ -63,5 +65,10 @@ code {
     align-self: center;
     margin-top: .5rem;
   }
+}
+
+footer {
+  margin-top: 30px;
+  font-size: .7rem;
 }
 
