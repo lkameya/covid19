@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ResizeObserver from 'resize-observer-polyfill';
 
 // responsive hook
 export default function useResizeObserver(ref) {
