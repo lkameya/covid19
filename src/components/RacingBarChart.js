@@ -39,6 +39,9 @@ const getCountryCode = country => {
     case "Switzerland":
       code = "CH";
       break;
+    case "Japan":
+      code = "JP";
+      break;
     default:
       code = "GG";
   }

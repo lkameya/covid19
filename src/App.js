@@ -2,6 +2,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import RacingBarChart from './components/RacingBarChart';
 import useInterval from './hooks/useInterval';
 import countries from "./countries";
+import moment from "moment";
 import './App.css';
 
 const getColors = country => {
@@ -41,6 +42,9 @@ const getColors = country => {
     case "Switzerland":
       color = "#d6344740";
       break;
+    case "Japan":
+      color = "#d6344720";
+      break;
     default:
       color = "black";
   }
@@ -79,9 +83,9 @@ function App() {
 
   return (
     <>
-      <h1>Covid-19 Cases</h1>
+      <h1>Covid-19</h1>
       <Suspense>
-        <h2>{currentData[0] && new Date(currentData[0].date).toLocaleDateString()}</h2>
+        <h2>{currentData[0] && moment(currentData[0].date, 'YYYY-MM-DD').format('DD/MM/YYYY')}</h2>
         <h2>Day {iteration + 1}</h2>
         <div className="container">
           <RacingBarChart data={currentData} />

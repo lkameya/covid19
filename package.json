@@ -9,6 +9,7 @@
     "country-flag-icons": "^1.2.0",
     "d3": "^5.15.0",
     "emoji-flags": "^1.2.0",
+    "moment": "^2.24.0",
     "nice-color-palettes": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
