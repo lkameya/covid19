@@ -66,7 +66,6 @@ function App() {
   }, []);
 
   useInterval(() => {
-    console.log(iteration);
     if (!data || iteration >= 62) return;
     setCurrentData([...Object.keys(data).map((x, i) => {
       return {
