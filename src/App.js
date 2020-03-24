@@ -91,7 +91,10 @@ function App() {
         </div>
       </Suspense>
       <button onClick={() => setIteration(0)}>Restart</button>
-      <footer>Made by <a href="https://www.github.com/lkameya">Leo</a></footer>
+      <footer>
+        <div>Made by <a href="https://www.github.com/lkameya">Leo</a></div>
+        <div>Data from <a href="https://github.com/pomber/covid19">@pomber</a></div>
+      </footer>
     </>
   );
 }
