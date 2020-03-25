@@ -10,7 +10,9 @@ const countries = [
   "France",
   "Korea, South",
   "Switzerland",
-  "Japan"
+  "Japan",
+  "United Kingdom",
+  "Netherlands"
 ]
 
 export default countries;

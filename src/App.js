@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import RacingBarChart from './components/RacingBarChart';
 import useInterval from './hooks/useInterval';
+import { RadioGroup, RadioButton } from "./components/RadioButton";
 import countries from "./countries";
 import moment from "moment";
 import './App.css';
@@ -35,7 +36,6 @@ const getColors = country => {
     case "Spain":
       color = "#feb72b";
       break;
-
     case "Korea, South":
       color = "#4a47a350";
       break;
@@ -44,6 +44,12 @@ const getColors = country => {
       break;
     case "Japan":
       color = "#d6344720";
+      break;
+    case "United Kingdom":
+      color = "#00508280";
+      break;
+    case "Netherlands":
+      color = "#ffa41b95";
       break;
     default:
       color = "black";
@@ -55,6 +61,7 @@ function App() {
   const [data, setData] = useState([]);
   const [iteration, setIteration] = useState(0);
   const [currentData, setCurrentData] = useState([]);
+  const [type, setType] = useState("cases");
 
   useEffect(() => {
     fetch("https://pomber.github.io/covid19/timeseries.json")
@@ -66,18 +73,23 @@ function App() {
   }, []);
 
   useInterval(() => {
-    if (!data || iteration >= 62) return;
+    if (!data || iteration >= 63) return;
     setCurrentData([...Object.keys(data).map((x, i) => {
       return {
         name: x,
-        value: data[x][iteration].confirmed,
+        value: type === "cases" ? data[x][iteration].confirmed : data[x][iteration].deaths,
         color: getColors(x),
         date: data[x][iteration].date
       }
     }).filter(x => countries.some(item => item.includes(x.name)))]
     );
     setIteration(iteration + 1);
-  }, 1000)
+  }, 1000);
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    setType(e.target.value);
+  }
 
 
   return (
@@ -86,8 +98,24 @@ function App() {
       <Suspense>
         <h2>{currentData[0] && moment(currentData[0].date, 'YYYY-MM-DD').format('DD/MM/YYYY')}</h2>
         <h2>Day {iteration + 1}</h2>
+        <div className="options">
+          <label>
+            <input
+              type="radio" name="type" value="cases"
+              checked={type === "cases"}
+              onChange={handleChange}
+            /> Cases
+          </label>
+          <label>
+            <input
+              type="radio" name="type" value="deaths"
+              checked={type === "deaths"}
+              onChange={handleChange}
+            /> Deaths
+          </label>
+        </div>
         <div className="container">
-          <RacingBarChart data={currentData} />
+          <RacingBarChart data={currentData} type={type} />
         </div>
       </Suspense>
       <button onClick={() => setIteration(0)}>Restart</button>

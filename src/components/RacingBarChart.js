@@ -42,13 +42,19 @@ const getCountryCode = country => {
     case "Japan":
       code = "JP";
       break;
+    case "United Kingdom":
+      code = "GB";
+      break;
+    case "Netherlands":
+      code = "NL";
+      break;
     default:
       code = "GG";
   }
   return code;
 }
 
-export default function RacingBarChart({ data }) {
+export default function RacingBarChart({ data, type }) {
   const svgRef = useRef();
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
@@ -95,7 +101,7 @@ export default function RacingBarChart({ data }) {
             (entry, index) => yScale(index) + yScale.bandwidth() / 2 + 5
           )
       )
-      .text(entry => `${emojiFlags.countryCode(getCountryCode(entry.name)).emoji} ${entry.name} (${entry.value} cases)`)
+      .text(entry => `${emojiFlags.countryCode(getCountryCode(entry.name)).emoji} ${entry.name} (${entry.value} ${type === "cases" ? "cases" : "deaths"})`)
       .attr("class", "label")
       .attr("x", 10)
       .transition()
