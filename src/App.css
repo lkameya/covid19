@@ -21,13 +21,7 @@ button {
   width: 200px;
   height: 20px;
   border: 1px solid black;
-  margin: 0 auto 5px;
-}
-
-button:hover {
-  background-color: #eee;
-  cursor: pointer;
-  margin-top: 10px;
+  background-color: white;
 }
 
 html, body {
@@ -84,7 +78,17 @@ code {
     width: 50%;
     margin: 15px; 
   }
-  
+
+  button {
+    width: 200px;
+    height: 100px;
+    min-height: 40px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 0 10px 0 10px;
+    background-color: white;
+    line-height: 0.8;
+  }
 }
 
 footer {
