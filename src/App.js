@@ -58,6 +58,7 @@ const getColors = country => {
 
 function App() {
   const [data, setData] = useState([]);
+  const [total, setTotal] = useState(0);
   const [iteration, setIteration] = useState(0);
   const [currentData, setCurrentData] = useState([]);
   const [type, setType] = useState("cases");
@@ -66,13 +67,14 @@ function App() {
     fetch("https://pomber.github.io/covid19/timeseries.json")
       .then(response => response.ok && response.json())
       .then(data => {
-        setData(data)
+        setData(data);
+        setTotal(data["US"].length);
       })
       .catch(error => console.error(error));
   }, []);
 
   useInterval(() => {
-    if (!data || (data["US"] && !data["US"][iteration]))
+    if (!data || iteration > (total - 1))
       return;
 
     setCurrentData([...Object.keys(data).map((x, i) => {
@@ -88,8 +90,19 @@ function App() {
   }, 1000);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setType(e.target.value);
+
+    if (iteration > total - 1) {
+      setCurrentData([...Object.keys(data).map((x, i) => {
+        return {
+          name: x,
+          value: type === "deaths" ? data[x][iteration - 1].confirmed : data[x][iteration - 1].deaths,
+          color: getColors(x),
+          date: data[x][iteration - 1].date
+        }
+      }).filter(x => countries.some(item => item.includes(x.name)))]
+      );
+    }
   }
 
 
