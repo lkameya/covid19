@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import RacingBarChart from './components/RacingBarChart';
 import useInterval from './hooks/useInterval';
-import { RadioGroup, RadioButton } from "./components/RadioButton";
 import countries from "./countries";
 import moment from "moment";
 import './App.css';
@@ -73,7 +72,9 @@ function App() {
   }, []);
 
   useInterval(() => {
-    if (!data || iteration >= 63) return;
+    if (!data || (data["US"] && !data["US"][iteration]))
+      return;
+
     setCurrentData([...Object.keys(data).map((x, i) => {
       return {
         name: x,

@@ -107,7 +107,7 @@ export default function RacingBarChart({ data, type }) {
       .transition()
       .attr("y", (entry, index) => yScale(index) + yScale.bandwidth() / 2 + 5);
 
-  }, [data, dimensions]);
+  }, [data, dimensions, type]);
 
   return (
     <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
